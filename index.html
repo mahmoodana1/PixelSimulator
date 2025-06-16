@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel World Simulator</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        canvas {
+            border: 2px solid #555;
+            background-color: #000;
+            border-radius: 8px;
+            cursor: crosshair;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button.active {
+            background-color: #007bff;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #erase-btn {
+            background-color: #ff4d4d;
+        }
+        #erase-all-btn {
+            background-color: rgba(255, 0, 0, 0.8);
+            color: white;
+            margin-left:40px;
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .game-canvas-graphics {
+            position: absolute;
+            top: 18%;
+            left: 7.5%;
+            pointer-events: none; /* Prevent interaction with the graphics canvas */
+            z-index: 1; /* Ensure it is above the main canvas */
+            background-color: transparent;
+        }
+    </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.  .com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="controls">
+        <button id="sand-btn" class="active">Sand</button>
+        <button id="water-btn">Water</button>
+        <button id="dirt-btn">Dirt</button>
+        <button id="lava-btn">Lava</button>
+        <button id="erase-btn">Erase</button>
+        <button id="erase-all-btn" class="erase-all-btn">Clean Canvas</button>
+        <button id="render-btn">Render</button>
+    </div>
+    <div class ="controls">
+    <label for="flow-slider" style="margin:5px;">Particle Flow:</label>
+    <input type="range" id="flow-slider" min="1" max="30" value="10" style="margin:5px;">
+    <h3 id="flow-number">1</h3>
+    </div>
+    <canvas id="game-canvas" width="1300" height="650"></canvas>
+    <canvas id="game-canvas-graphics" width="1300" height="650" class="game-canvas-graphics"></canvas>
+    <script src="particle.js" defer></script>
+    <script src="renderingParticle.js" defer></script>
+    <script src="game.js" defer></script>
+
+</body>
+</html>
