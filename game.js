@@ -1,5 +1,4 @@
 const canvas = document.getElementById('game-canvas');
-const ctxGraphics = graphics.getContext('2d');
 const ctx = canvas.getContext('2d');
 
 const buttons = {
