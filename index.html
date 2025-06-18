@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pixel World Simulator</title>
     <style>
         body {
@@ -11,30 +11,44 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            min-height: 100vh;
             margin: 0;
+            padding: 10px;
             background-color: #1a1a1a;
             color: #f0f0f0;
-            padding: 10px;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
         canvas {
             border: 2px solid #555;
             background-color: #000;
             border-radius: 8px;
             cursor: crosshair;
+            max-width: 100%;
+            height: auto;
+            touch-action: none;
         }
         #controls {
             margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 20px;
             font-size: 16px;
-            margin: 0 5px;
             border: none;
             border-radius: 5px;
             background-color: #444;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            min-width: 80px;
         }
         button.active {
             background-color: #007bff;
@@ -53,15 +67,43 @@
         .controls {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 10px;
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
         }
         .game-canvas-graphics {
             position: absolute;
             top: 18%;
             left: 7.5%;
-            pointer-events: none; /* Prevent interaction with the graphics canvas */
-            z-index: 1; /* Ensure it is above the main canvas */
+            pointer-events: none;
+            z-index: 1;
             background-color: transparent;
+            max-width: 100%;
+            height: auto;
+        }
+        #flow-slider {
+            width: 150px;
+            margin: 0;
+        }
+        @media (max-width: 600px) {
+            button {
+                padding: 10px 15px;
+                font-size: 14px;
+                min-width: 70px;
+            }
+            #controls {
+                gap: 5px;
+            }
+            canvas {
+                width: 100%;
+                max-height: 60vh;
+            }
+            .controls {
+                padding: 0 10px;
+            }
         }
     </style>
      <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,7 +126,7 @@
     <input type="range" id="flow-slider" min="1" max="30" value="10" style="margin:5px;">
     <h3 id="flow-number">1</h3>
     </div>
-    <canvas id="game-canvas" width="1300" height="650"></canvas>
+    <canvas id="game-canvas" width="800" height="600"></canvas>
     <script src="particle.js" defer></script>
     <script src="renderingParticle.js" defer></script>
     <script src="game.js" defer></script>
