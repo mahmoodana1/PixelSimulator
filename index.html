@@ -108,10 +108,9 @@
     </style>
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.  .com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="controls">
         <button id="sand-btn" class="active">Sand</button>
         <button id="water-btn">Water</button>
@@ -121,15 +120,16 @@
         <button id="erase-all-btn" class="erase-all-btn">Clean Canvas</button>
         <button id="render-btn">Render</button>
     </div>
-    <div class ="controls">
-    <label for="flow-slider" style="margin:5px;">Particle Flow:</label>
-    <input type="range" id="flow-slider" min="1" max="30" value="10" style="margin:5px;">
-    <h3 id="flow-number">1</h3>
+    <div class="controls">
+        <label for="flow-slider" style="margin:5px;">Particle Flow:</label>
+        <input type="range" id="flow-slider" min="1" max="30" value="10" style="margin:5px;">
+        <h3 id="flow-number">1</h3>
     </div>
     <canvas id="game-canvas" width="800" height="600"></canvas>
-    <script src="particle.js" defer></script>
-    <script src="renderingParticle.js" defer></script>
-    <script src="game.js" defer></script>
-
-</body>
-</html>
+    <!-- Load dependencies first -->
+    <script src="particle.js"></script>
+    <script src="renderingParticle.js"></script>
+    <!-- Initialize game last -->
+    <script>
+        window.addEventListener('load', () => {
+       
