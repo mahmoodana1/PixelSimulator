@@ -644,31 +644,34 @@ function render() {
         v === C_TYPE.MOON_RAY
     );
 
+    // Cast moon rays
+    const maxRayLength = Math.min(renderingGrid.length, renderingGrid[0].length);
+    
     for (let y = 0; y < renderingGrid[0].length; y++) {
-        if (y > 200){
-
-            console.log(y)
-        }
-        for (let x = 0; x < renderingGrid.length; x++) {
-            if ((x === renderingGrid.length - 1 && y < 80) || renderingGrid[x][y] == C_TYPE.MOON_SHADE) {
-                for (let rayX = x - 2, rayY = y; rayX >= 2 && rayY < renderingGrid[0].length - 2; rayY++, rayX = rayX - 2) {
-                    if (
-                    isRayAvailable(renderingGrid[rayX][rayY]) &&
-                    isRayAvailable(renderingGrid[rayX - 1][rayY])
-                    ) {
-                        if (
-                            doesRenderWithRay(renderingGrid[rayX][rayY]) ||
-                            doesRenderWithRay(renderingGrid[rayX - 1][rayY])
-                        )
-                        {
-                            continue;
-                        }else {
-                            renderingGrid[rayX][rayY] = C_TYPE.MOON_RAY;
-                            renderingGrid[rayX - 1][rayY] = C_TYPE.MOON_RAY;
-                        }
-                    } else {
+        for (let x = renderingGrid.length - 1; x >= 0; x--) {
+            // Only cast rays from moon pixels
+            if (renderingGrid[x][y] === C_TYPE.MOON_SHADE || renderingGrid[x][y] === C_TYPE.MOON_EDGE) {
+                let rayLength = 0;
+                let rayX = x - 1;
+                let rayY = y + 1;
+                
+                while (rayLength < maxRayLength && 
+                       rayX >= 0 && 
+                       rayY < renderingGrid[0].length) {
+                    
+                    if (!isRayAvailable(renderingGrid[rayX][rayY])) {
                         break;
                     }
+                    
+                    if (!doesRenderWithRay(renderingGrid[rayX][rayY])) {
+                        if (Math.random() < 0.7) { // Add some randomness to the rays
+                            renderingGrid[rayX][rayY] = C_TYPE.MOON_RAY;
+                        }
+                    }
+                    
+                    rayX--;
+                    rayY++;
+                    rayLength++;
                 }
             }
         }
